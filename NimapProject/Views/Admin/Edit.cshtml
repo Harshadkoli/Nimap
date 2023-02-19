@@ -1,0 +1,30 @@
+﻿@model NimapProject.Models.CategoryModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+<div class="container-fluid pt-4 px-4">
+    <form method="post" id="Teams">
+        <h6 class="mb-4">Update Category</h6>
+        @if (ViewBag.Message != "")
+            {
+            <div class="p-2 mb-2 bg-@ViewBag.Class text-white">@ViewBag.Message</div>
+        }
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-4">
+                <div class="mb-3">
+                    <label for="CategoryName" class="form-label">Category Name</label>
+                    @Html.TextBoxFor(m => m.CategoryName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CategoryName, "", new { @class = "text-danger" })
+                </div>
+              
+          
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

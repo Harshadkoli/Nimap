@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "GetAllProduct";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>GetAllProduct</h2>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>  
+
+<div class="col-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Data Table</h6>
+        @if (Convert.ToString(TempData["Message"]) != "")
+        {
+            <div class=" p-2 mb-2 bg-@TempData["Class"] text-white">@TempData["Message"]</div>
+        }
+        @if (Convert.ToString(TempData["DeleteMessage"]) != "")
+        {
+            <div class=" p-2 mb-2 bg-@TempData["Class"] text-white">@TempData["DeleteMessage"]</div>
+        }
+        <div class="table-responsive">
+            <table id="tbldata" class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ProductId</th>
+                        <th scope="col">ProductName</th>
+                        <th scope="col">CategoryId</th>
+                        <th scope="col">CategoryName</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.getprolist)
+                    {
+                        <tr>
+                            <th scope="row">@item.ProductId</th>
+                            <td>@item.ProductName</td>
+                            <td>@item.CategoryId</td>
+                            <td>@item.CategoryName</td>
+                            <td><a class="btn btn-primary" href="@Url.Action("EditProduct","Admin", new  { id = item.ProductId })">EDIT</a></td>
+                            <td><a class="btn btn-primary" href="@Url.Action("DeletePro","Admin", new  { id = item.ProductId })">DELETE</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <script>
+            $(function () {
+                $("#tbldata").paging({ limit: 5 });
+            })
+        </script>
+    </div>
+</div>
+
+

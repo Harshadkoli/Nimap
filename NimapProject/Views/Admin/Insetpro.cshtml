@@ -1,0 +1,69 @@
+﻿@model NimapProject.Models.ProductModel
+@{
+    ViewBag.Title = "Insetpro";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Insetpro</h2>
+
+
+<div class="container-fluid pt-4 px-4">
+    <form method="post" id="Tournament" enctype="multipart/form-data">
+        @*@Html.HiddenFor(m => m.hdncategoryvalues)
+        @Html.HiddenFor(m=> m.hdncategoryidvalues)*@
+        <h6 class="mb-4">Create Product</h6>
+        @if (Convert.ToString(TempData["Message"]) != "")
+        {
+            <div class="p-2 mb-2 bg-@TempData["Class"] text-white">@TempData["Message"]</div>
+        }
+        @if (ViewBag.Message != "")
+        {
+            <div class="p-2 mb-2 bg-@ViewBag.Class text-white">@ViewBag.Message</div>
+        }
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-4">
+                <div class="mb-3">
+                    <label for="Product" class="form-label">Product Name</label>
+                    @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
+                </div>
+               
+               
+                <div class="mb-3">
+                    <label for="Category" class="form-label">Category</label>
+                    @Html.DropDownListFor(m => m.Product_CatId, Model.CategoryList.Select(
+                        m => new SelectListItem
+                        {
+                            Text = m.CategoryName,
+                            Value = Convert.ToString(m.CategoryId)
+                        }), new { @class = "form-control", @placeholder = "Please select Category" })
+                    @Html.ValidationMessageFor(m => m.Product_CatId, "", new { @class = "text-danger" })
+
+
+                </div>
+
+                @*<div class="mb-3">
+                    <label for="CategoryId" class="form-label">CategoryId</label>
+                    @Html.ListBoxFor(m => m.Product_CatId, Model.CategoryList.Select(
+                        m => new SelectListItem
+                        {
+                           Text=Convert.ToString(m.CategoryId),
+                            Value = Convert.ToString(m.CategoryId)
+                        }), new { @class = "form-control", @multiple = "multiple", @placeholder = "Please select Category" })
+                    @Html.ValidationMessageFor(m => m.Product_CatId, "", new { @class = "text-danger" })
+
+
+                </div>*@
+             
+          
+
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+
+
+

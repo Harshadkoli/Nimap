@@ -1,0 +1,111 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <title>jQuery Paging Plugin Demo</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style type="text/css">
+        .paging-nav {
+            text-align: right;
+            padding-top: 2px;
+        }
+
+            .paging-nav a {
+                margin: auto 1px;
+                text-decoration: none;
+                display: inline-block;
+                padding: 1px 7px;
+                background: #91b9e6;
+                color: white;
+                border-radius: 3px;
+            }
+
+            .paging-nav .selected-page {
+                background: #187ed5;
+                font-weight: bold;
+            }
+
+        .paging-nav,
+        #tableData {
+            width: 400px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="jquery-script-menu">
+        <div class="jquery-script-center">
+
+            <a href="@Url.Action("Insertcat","Admin")">Home</a>
+            <div class="jquery-script-clear"></div>
+        </div>
+    </div>
+    <h1 style="margin-top:150px; text-align:center;">jQuery Paging Plugin Demo</h1>
+    @if (Convert.ToString(TempData["Message"]) != "")
+    {
+        <div class=" p-2 mb-2 bg-@TempData["Class"] text-white">@TempData["Message"]</div>
+    }
+    @if (Convert.ToString(TempData["DeleteMessage"]) != "")
+    {
+        <div class=" p-2 mb-2 bg-@TempData["Class"] text-white">@TempData["DeleteMessage"]</div>
+    }
+    <table id="tableData" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ProductId</th>
+                <th scope="col">ProductName</th>
+                <th scope="col">CategoryId</th>
+                <th scope="col">CategoryName</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.getprolist)
+            {
+                <tr>
+                    <th scope="row">@item.ProductId</th>
+                    <td>@item.ProductName</td>
+                    <td>@item.CategoryId</td>
+                    <td>@item.CategoryName</td>
+                    <td><a class="btn btn-primary" href="@Url.Action("EditProduct","Admin", new  { id = item.ProductId })">EDIT</a></td>
+                    <td><a class="btn btn-primary" href="@Url.Action("DeletePro","Admin", new  { id = item.ProductId })">DELETE</a></td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    @*<script type="text/javascript" src="paging.js"></script>*@
+    <script src="~/paging.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function() {
+                $('#tableData').paging({limit:5});
+            });
+    </script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+    </script>
+
+</body>
+</html>

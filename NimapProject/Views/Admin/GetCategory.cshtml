@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "GetCategory";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>GetCategory</h2>
+
+<div class="col-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Category Table</h6>
+        @if (Convert.ToString(TempData["Message"]) != "")
+        {
+            <div class=" p-2 mb-2 bg-@TempData["Class"] text-white">@TempData["Message"]</div>
+        }
+        @if (Convert.ToString(TempData["DeleteMessage"]) != "")
+        {
+            <div class=" p-2 mb-2 bg-@TempData["Class"] text-white">@TempData["DeleteMessage"]</div>
+        }
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">CategoryName</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.getlist)
+                    {
+                        <tr>
+                            <th scope="row">@item.CategoryId</th>
+                            <td>@item.CategoryName</td>
+                            <td><a class="btn btn-primary" href="@Url.Action("Edit","Admin", new  { id = item.CategoryId })">EDIT</a></td>
+                                <td><a class="btn btn-primary" href="@Url.Action("Delete","Admin", new  { id = item.CategoryId})">DELETE</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

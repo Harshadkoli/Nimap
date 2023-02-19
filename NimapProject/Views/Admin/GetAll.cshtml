@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>GetAllData</h2>
+
+<div class="col-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Data Table</h6>
+        @if (Convert.ToString(TempData["Message"]) != "")
+        {
+            <div class=" p-2 mb-2 bg-@TempData["Class"] text-white">@TempData["Message"]</div>
+        }
+        @if (Convert.ToString(TempData["DeleteMessage"]) != "")
+        {
+            <div class=" p-2 mb-2 bg-@TempData["Class"] text-white">@TempData["DeleteMessage"]</div>
+        }
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ProductId</th>
+                        <th scope="col">ProductName</th>
+                        <th scope="col">CategoryId</th>
+                        <th scope="col">CategoryName</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.getall)
+                    {
+                        <tr>
+                            <th scope="row">@item.ProductId</th>
+                            <td>@item.ProductName</td>
+                            <td>@item.CategoryId</td>
+                            <td>@item.CategoryName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
