@@ -194,13 +194,29 @@ namespace NimapProject.Controllers
             }
             }
         [HttpGet]
-        public ActionResult GetAllProduct()
+        public ActionResult GetAllProduct(int? page)
         {
+            int pagesize = 3;
+            //int sqlpage;
             List<ProductModel> getprolist = new List<ProductModel>();
-
+            //if (page == null)
+            //{
+            //    sqlpage = 0;
+            //}
+            //else
+            //{
+            //    sqlpage = Convert.ToInt32(page);
+            //}   
+            //getprolist = Objadmin.ShowProData(getprolist, Convert.ToInt32(sqlpage), pagesize);
             getprolist = Objadmin.ShowProData(getprolist);
-            ViewBag.getprolist = getprolist;
-            return View(getprolist);
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    ProductModel m = new ProductModel();
+            //    getprolist.Add(m);
+            //}
+
+
+            return View(getprolist.ToList().ToPagedList(page ?? 1, pagesize));
         }
         [HttpGet]
         public ActionResult EditProduct(int id)
@@ -280,7 +296,7 @@ namespace NimapProject.Controllers
         {
             List<ProductModel> getprolist = new List<ProductModel>();
 
-            getprolist = Objadmin.ShowProData(getprolist);
+           // getprolist = Objadmin.ShowProData(getprolist);
             ViewBag.getprolist = getprolist;
             return View(getprolist);
         }
@@ -290,7 +306,7 @@ namespace NimapProject.Controllers
         {
             List<ProductModel> getprolist = new List<ProductModel>();
 
-            getprolist = Objadmin.ShowProData(getprolist);
+            //getprolist = Objadmin.ShowProData(getprolist);
             ViewBag.getprolist = getprolist;
             return View(getprolist);
         }

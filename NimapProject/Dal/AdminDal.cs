@@ -201,6 +201,39 @@ namespace NimapProject.Dal
                 throw;
             }
         }
+        //public List<ProductModel> ShowProData(List<ProductModel> getprolist,int page,int pagesize)
+        //{
+        //    CategoryModel model = new CategoryModel();
+        //    DataTable dt = new DataTable();
+        //    try
+        //    {
+        //        SqlDataAdapter dap;
+        //        SqlConnection MyConn = Objcommon.GetConnection();
+        //        SqlCommand cmd = new SqlCommand("sp_GetAllproducts", MyConn);
+        //        cmd.Parameters.Add("@page", SqlDbType.Int).Value = page;
+        //        cmd.Parameters.Add("@size", SqlDbType.Int).Value = pagesize;
+        //        cmd.Parameters.Add("@sort", SqlDbType.VarChar).Value = "createdon";
+        //        cmd.Parameters.Add("@totalrow", SqlDbType.Int).Value = 0;
+        //        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //        cmd.CommandTimeout = 50000;
+        //        dap = new SqlDataAdapter(cmd);
+        //        dap.Fill(dt);
+
+        //        getprolist = dt.AsEnumerable().ToList().ConvertAll(x => new ProductModel
+        //        {
+        //            ProductId = x.Field<int>("ProductId"),
+        //            CategoryId = x.Field<int>("CategoryId"),
+        //            ProductName = x.Field<string>("ProductName"),
+        //            CategoryName=x.Field<string>("CategoryName")
+        //        });
+        //        return getprolist;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+        //}
         public List<ProductModel> ShowProData(List<ProductModel> getprolist)
         {
             CategoryModel model = new CategoryModel();
@@ -210,6 +243,10 @@ namespace NimapProject.Dal
                 SqlDataAdapter dap;
                 SqlConnection MyConn = Objcommon.GetConnection();
                 SqlCommand cmd = new SqlCommand("GetProduct", MyConn);
+                //cmd.Parameters.Add("@page", SqlDbType.Int).Value = page;
+                //cmd.Parameters.Add("@size", SqlDbType.Int).Value = pagesize;
+                //cmd.Parameters.Add("@sort", SqlDbType.VarChar).Value = "createdon";
+                //cmd.Parameters.Add("@totalrow", SqlDbType.Int).Value = 0;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.CommandTimeout = 50000;
                 dap = new SqlDataAdapter(cmd);
@@ -220,7 +257,7 @@ namespace NimapProject.Dal
                     ProductId = x.Field<int>("ProductId"),
                     CategoryId = x.Field<int>("CategoryId"),
                     ProductName = x.Field<string>("ProductName"),
-                    CategoryName=x.Field<string>("CategoryName")
+                    CategoryName = x.Field<string>("CategoryName")
                 });
                 return getprolist;
             }
@@ -230,11 +267,10 @@ namespace NimapProject.Dal
                 throw;
             }
         }
-
         //public ProductModel GetAllProData(ProductModel model)
         //{ 
         //    DataTable dt = new DataTable();
-          
+
         //    try
         //    {
         //        SqlDataAdapter dap;
@@ -252,7 +288,7 @@ namespace NimapProject.Dal
         //            ProductName = x.Field<string>("ProductName"),
         //            CategoryName = x.Field<string>("CategoryName")
         //        }).ToList();
-               
+
         //        return model;
         //    }
         //    catch (Exception ex)

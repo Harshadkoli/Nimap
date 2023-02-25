@@ -1,4 +1,7 @@
-﻿
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<NimapProject.Models.ProductModel>
 @{
     ViewBag.Title = "GetAllProduct";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
@@ -13,7 +16,17 @@
 
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>  
-
+<style>
+    .paging-nav a {
+    margin: auto 1px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 7px;
+    background: #91b9e6;
+    color: white;
+    border-radius: 3px;
+    }
+</style>
 <div class="col-12">
     <div class="bg-secondary rounded h-100 p-4">
         <h6 class="mb-4">Data Table</h6>
@@ -38,7 +51,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in ViewBag.getprolist)
+                    @foreach (var item in Model)
                     {
                         <tr>
                             <th scope="row">@item.ProductId</th>
@@ -51,6 +64,13 @@
                     }
                 </tbody>
             </table>
+            @Html.PagedListPager(Model,page => Url.Action("GetAllProduct",new { page}))
+            @*<div class="paging-nav"><a href="#" data-direction="-1">&lt;&lt;</a>
+            <a href="#" data-page="0">1</a>
+            <a href="#" data-page="1">2</a>
+            <a href="#" data-page="2">3</a>
+            <a href="#" data-direction="1">&gt;&gt;</a>
+            </div>*@
         </div>
         <script>
             $(function () {
